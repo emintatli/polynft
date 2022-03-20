@@ -126,6 +126,7 @@ function App() {
       {!walletAddress?<div className="row">
         <div className="col-md-3"></div>
         <div className="col-md-6 text-center">
+        <img width={150} className="mb-2" src="/gif.gif"/>
           <h2>Please Connect</h2>
           <h4>Connect to the network (Accepted Wallet: Metamask).</h4>
           <a onClick={walletConnect} className="btn main-btn mb-2">CONNECT</a>
@@ -133,8 +134,11 @@ function App() {
         </div>
         <div className="col-md-3"></div>
       </div>:<><div className="row">
+       
 					<div className="col-md-3"></div>
+         
 					<div className="col-md-6 text-center">
+         
 						<h2>AVAILABLE</h2>
 						<a className="btn main-btn mint">{mintData&&`${mintData?.totalMint}/${mintData?.maxMint}`}</a>
 						<div className="input-groups">
