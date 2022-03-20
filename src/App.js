@@ -22,7 +22,7 @@ function App() {
     const web3 = new Web3(rpcUrl);
     const contract = new web3.eth.Contract(contractAbi,contractAddress);
     const totalMint=await contract.methods.totalSupply().call();
-    const maxMint=await contract.methods.maxMintAmount().call();
+    const maxMint=await contract.methods.maxSupply().call();
     await getPrice();
     setMintData({
       totalMint,
