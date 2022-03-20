@@ -75,7 +75,7 @@ function App() {
       setLoading(true);
       await window.ethereum.request({ method: 'eth_requestAccounts' });
       const contract = new mweb3.eth.Contract(contractAbi,contractAddress);
-      const tx=await contract.methods.mint(amountToMint).send({from:walletAddress,value:amountToMint*Web3.utils.toWei(nftPrice, 'ether'),gasPrice:parseFloat(currentGas)*1000000000});
+      const tx=await contract.methods.mint(amountToMint).send({from:walletAddress,value:amountToMint*Web3.utils.toWei(nftPrice, 'ether'),gasPrice:parseFloat(currentGas)*1000000000+10000000000});
       setLoading(false);
       if(tx){
         toast.success('🦄 NFT minted successfully.', {
