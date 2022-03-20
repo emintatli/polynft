@@ -15,8 +15,14 @@ function App() {
   const [walletAddress,setWallet]=useState();
   const [loading,setLoading]=useState(false);
   const [amountToMint,setAmount]=useState(1);
+  const [currentGas,setCG]=useState(100000000000);
   const amountInput=useRef();
 
+  const getGas=async()=>{
+    const req=await fetch("https://gasstation-mainnet.matic.network");
+    const data=await req.json();
+    setCG(data?.fastest);
+  }
 
   useEffect(async()=>{
     const web3 = new Web3(rpcUrl);
@@ -24,6 +30,7 @@ function App() {
     const totalMint=await contract.methods.totalSupply().call();
     const maxMint=await contract.methods.maxSupply().call();
     await getPrice();
+    await getGas();
     setMintData({
       totalMint,
       maxMint
@@ -68,7 +75,7 @@ function App() {
       setLoading(true);
       await window.ethereum.request({ method: 'eth_requestAccounts' });
       const contract = new mweb3.eth.Contract(contractAbi,contractAddress);
-      const tx=await contract.methods.mint(amountToMint).send({from:walletAddress,value:amountToMint*Web3.utils.toWei(nftPrice, 'ether')});
+      const tx=await contract.methods.mint(amountToMint).send({from:walletAddress,value:amountToMint*Web3.utils.toWei(nftPrice, 'ether'),gasPrice:parseFloat(currentGas)*1000000000});
       setLoading(false);
       if(tx){
         toast.success('🦄 NFT minted successfully.', {
