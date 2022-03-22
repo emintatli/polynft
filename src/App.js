@@ -128,7 +128,7 @@ function App() {
         <div className="col-md-6 text-center">
         <img width={150} className="mb-2" src="/gif.gif"/>
           <h2>Please Connect</h2>
-          <h4>Connect to the network (Accepted Wallet: Metamask).</h4>
+          <h4>Connect to the network </h4>
           <a onClick={walletConnect} className="btn main-btn mb-2">CONNECT</a>
           <h3>Price : {nftPrice} MATIC</h3>
         </div>
